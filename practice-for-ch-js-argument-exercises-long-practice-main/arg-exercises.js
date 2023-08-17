@@ -1,4 +1,4 @@
-function sum() {
+function sum1() {
     let totalSum = 0;
     for (let i = 0; i < arguments.length; i++) {
         totalSum += arguments[i];
@@ -6,8 +6,8 @@ function sum() {
     return totalSum;
 };
 
-// console.log(sum(1, 2, 3, 4))
-// console.log(sum(1, 2, 3, 4, 5))
+// console.log(sum1(1, 2, 3, 4))
+// console.log(sum1(1, 2, 3, 4, 5))
 
 function sum2(...args) {
     let totalSum = 0;
@@ -70,10 +70,33 @@ class Cat {
   const markov = new Cat("Markov");
   const pavlov = new Dog("Pavlov");
 
-markov.says("meow", "Ned");
+// markov.says("meow", "Ned");
 
-markov.says.myBind(pavlov, "meow", "Kush")();
-markov.says.myBind(pavlov)("meow", "a tree");
-markov.says.myBind(pavlov, "meow")("Markov");
-const notMarkovSays = markov.says.myBind(pavlov);
-notMarkovSays("meow", "me");
+// markov.says.myBind(pavlov, "meow", "Kush")();
+// markov.says.myBind(pavlov)("meow", "a tree");
+// markov.says.myBind(pavlov, "meow")("Markov");
+// const notMarkovSays = markov.says.myBind(pavlov);
+// notMarkovSays("meow", "me");
+
+function curriedSum(numArgs) {
+    let numbers = [];
+    function _curriedSum(number) {
+        numbers.push(number)
+    if (numbers.length === numArgs) {
+        let res = 0;
+        numbers.forEach(function(num) {
+            res += num;
+        })
+        return res;
+    }
+    else {
+        return _curriedSum;
+    }
+    }
+    return _curriedSum;
+}
+
+const sum = curriedSum(4);
+console.log(sum(5)(30)(20)(1));
+
+
