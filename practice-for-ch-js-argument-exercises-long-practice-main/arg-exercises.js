@@ -105,8 +105,10 @@ Function.prototype.curry = function(numArgs){
     return function _curry(){
         let args = Array.prototype.slice.call(arguments);
         if(args.length === numArgs){
+            console.log(args.length);
             return that.curry.apply(that);
         }else{
+            // console.log(args.length);
             return _curry;
         }
     }
@@ -114,4 +116,4 @@ Function.prototype.curry = function(numArgs){
 }
 
 const v1 = sum1.curry(4);
-console.log(v1(2)(3)(1)(1));
+console.log(v1(2,3,1));
