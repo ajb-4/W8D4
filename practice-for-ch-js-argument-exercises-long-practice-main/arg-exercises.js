@@ -97,6 +97,21 @@ function curriedSum(numArgs) {
 }
 
 const sum = curriedSum(4);
-console.log(sum(5)(30)(20)(1));
+// console.log(sum(5)(30)(20)(1));
 
 
+Function.prototype.curry = function(numArgs){
+    let that = this;
+    return function _curry(){
+        let args = Array.prototype.slice.call(arguments);
+        if(args.length === numArgs){
+            return that.curry.apply(that);
+        }else{
+            return _curry;
+        }
+    }
+
+}
+
+const v1 = sum1.curry(4);
+console.log(v1(2)(3)(1)(1));
