@@ -96,13 +96,13 @@ function curriedSum(numArgs) {
     return _curriedSum;
 }
 
-const sum = curriedSum(4);
+// const sum = curriedSum(4);
 // console.log(sum(5)(30)(20)(1));
-console.log(sum(5));
-console.log(sum(5));
-console.log(sum(30));
-console.log(sum(20));
-console.log(sum(1));
+// console.log(sum(5));
+// console.log(sum(5));
+// console.log(sum(30));
+// console.log(sum(20));
+// console.log(sum(1));
 
 Function.prototype.curry = function(numArgs){
     let that = this;
@@ -120,5 +120,5 @@ Function.prototype.curry = function(numArgs){
 
 }
 
-const v1 = sum1.curry(4);
-console.log(v1(2)(3)(1));
+const v1 = sum2.curry(4);
+console.log(v1(2)(5)(7)(9));
