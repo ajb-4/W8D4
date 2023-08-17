@@ -34,9 +34,18 @@ function sum3() {
 
 Function.prototype.myBind = function(ctx){
     let that = this;
-    let args = Array.prototype.slice(1).call(arguments);
+    let args = Array.prototype.slice.call(arguments).slice(1);
     return function (){
         let args2 = Array.prototype.slice.call(arguments);
+        return that.apply(ctx, args.concat(args2));
+    }
+}
+
+Function.prototype.myBind2 = function(ctx, ...args){
+    let that = this;
+    // let args = Array.prototype.slice.call(arguments).slice(1);
+    return function (...args2){
+        // let args2 = Array.prototype.slice.call(arguments);
         return that.apply(ctx, args.concat(args2));
     }
 }
@@ -61,6 +70,10 @@ class Cat {
   const markov = new Cat("Markov");
   const pavlov = new Dog("Pavlov");
 
-  markov.says("meow", "Ned");
+markov.says("meow", "Ned");
 
-  console.log(markov.says.myBind(pavlov, "meow", "Kush")());
+markov.says.myBind(pavlov, "meow", "Kush")();
+markov.says.myBind(pavlov)("meow", "a tree");
+markov.says.myBind(pavlov, "meow")("Markov");
+const notMarkovSays = markov.says.myBind(pavlov);
+notMarkovSays("meow", "me");
